@@ -504,7 +504,7 @@ GraphicsConsoleControllerDriverStart (
       // Current graphics mode is not set or is not set to the mode which we has found,
       // set the new graphic mode.
       //
-      Status = Private->GraphicsOutput->SetMode (Private->GraphicsOutput, ModeNumber);
+      //Status = Private->GraphicsOutput->SetMode (Private->GraphicsOutput, ModeNumber);
       if (EFI_ERROR (Status)) {
         //
         // The mode set operation failed
@@ -766,7 +766,7 @@ CheckModeSupported (
     if (!EFI_ERROR (Status)) {
       if ((Info->HorizontalResolution == HorizontalResolution) &&
           (Info->VerticalResolution == VerticalResolution)) {
-        if ((GraphicsOutput->Mode->Info->HorizontalResolution == HorizontalResolution) &&
+        /*if ((GraphicsOutput->Mode->Info->HorizontalResolution == HorizontalResolution) &&
             (GraphicsOutput->Mode->Info->VerticalResolution == VerticalResolution)) {
           //
           // If video device has been set to this mode, we do not need to SetMode again
@@ -779,7 +779,7 @@ CheckModeSupported (
             FreePool (Info);
             break;
           }
-        }
+        }*/
       }
       FreePool (Info);
     }
