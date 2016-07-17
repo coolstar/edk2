@@ -939,7 +939,7 @@ InitializeCpu (
                   );
   ASSERT_EFI_ERROR (Status);
 
-  InitializeMpSupport ();
+  //InitializeMpSupport ();
 
   return Status;
 }
