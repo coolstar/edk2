@@ -711,6 +711,57 @@ GetOptionalStringByIndex (
 }
 
 
+VOID
+GetDeviceNameFromProduct (
+  IN      CHAR16                  *Product,
+  OUT     CHAR16                  **DeviceName
+  )
+{
+  if (!StrCmp(Product, L"Auron")) {
+    StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"Acer Chromebook C740/C910");
+  } else if (!StrCmp(Product, L"Auron_Paine")) {
+    StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"Acer Chromebook 11 C740");
+  }  else if (!StrCmp(Product, L"Auron_Yuna")) {
+    StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"Acer Chromebook 15 C910");
+  } else if (!StrCmp(Product, L"Falco")) {
+    StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"HP Chromebook 14");
+  } else if (!StrCmp(Product, L"Gandof")) {
+    StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"Toshiba Chromebook2 2015");
+  } else if (!StrCmp(Product, L"Guado")) {
+    StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"Asus Chromebox CN62");
+  } else if (!StrCmp(Product, L"Leon")) {
+    StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"Toshiba Chromebook");
+  } else if (!StrCmp(Product, L"Lulu")) {
+    StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"Dell Chromebook 13 7310");
+  } else if (!StrCmp(Product, L"Mccloud")) {
+    StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"Acer Chromebox CXI");
+  } else if (!StrCmp(Product, L"Monroe")) {
+    StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"LG Chromebase");
+  } else if (!StrCmp(Product, L"Ninja")) {
+    StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"AOpen Chromebox Commercial");
+  } else if (!StrCmp(Product, L"Panther")) {
+    StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"Asus Chromebox CN60");
+  } else if (!StrCmp(Product, L"Parrot")) {
+    StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"Acer Chromebook C710");
+  } else if (!StrCmp(Product, L"Peppy")) {
+    StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"Acer Chromebook C720");
+  } else if (!StrCmp(Product, L"Rikku")) {
+    StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"Acer Chromebox CXI2");
+  } else if (!StrCmp(Product, L"Samus")) {
+    StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"Google Pixel 2015");
+  } else if (!StrCmp(Product, L"Tidus")) {
+    StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"Lenovo ThinkCentre Chromebox");
+  }  else if (!StrCmp(Product, L"Tricky")) {
+    StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"Dell Chromebox 3010");
+  } else if (!StrCmp(Product, L"Wolf")) {
+    StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"Dell Chromebook 11 2013");
+  }  else if (!StrCmp(Product, L"Zako")) {
+    StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"HP Chromebox CB1");
+  } 
+  //etc etc
+}
+
+
 /**
   Update the banner information for the Front Page based on DataHub information.
 
@@ -721,7 +772,10 @@ UpdateFrontPageStrings (
   )
 {
   UINT8                             StrIndex;
+  UINT8                             Str2Index;
   CHAR16                            *NewString;
+  CHAR16                            *NewString2;
+  CHAR16                            *NewString3;
   EFI_STATUS                        Status;
   EFI_STRING_ID                     TokenToUpdate;
   EFI_SMBIOS_HANDLE                 SmbiosHandle;
@@ -747,21 +801,36 @@ UpdateFrontPageStrings (
     SmbiosHandle = SMBIOS_HANDLE_PI_RESERVED;
     Status = Smbios->GetNext (Smbios, &SmbiosHandle, NULL, &Record, NULL);
     while (!EFI_ERROR(Status)) {
-      if (Record->Type == SMBIOS_TYPE_BIOS_INFORMATION) {
+      NewString3 = AllocateZeroPool (0x60);
+
+      if (Record->Type == EFI_SMBIOS_TYPE_BIOS_INFORMATION) {
         Type0Record = (SMBIOS_TABLE_TYPE0 *) Record;
         StrIndex = Type0Record->BiosVersion;
+        Str2Index = Type0Record->BiosReleaseDate;
         GetOptionalStringByIndex ((CHAR8*)((UINT8*)Type0Record + Type0Record->Hdr.Length), StrIndex, &NewString);
+        GetOptionalStringByIndex ((CHAR8*)((UINT8*)Type0Record + Type0Record->Hdr.Length), Str2Index, &NewString2);
+        StrCatS (NewString3, 0x40 / sizeof (CHAR16), L"FW: ");
+        StrCatS (NewString3, 0x40 / sizeof (CHAR16), NewString2);
+        StrCatS (NewString3, 0x40 / sizeof (CHAR16), L"::");
+        StrCatS (NewString3, 0x40 / sizeof (CHAR16), NewString);
         TokenToUpdate = STRING_TOKEN (STR_FRONT_PAGE_BIOS_VERSION);
-        HiiSetString (gFrontPagePrivate.HiiHandle, TokenToUpdate, NewString, NULL);
+        HiiSetString (gFrontPagePrivate.HiiHandle, TokenToUpdate, NewString3, NULL);
         FreePool (NewString);
       }
 
       if (Record->Type == SMBIOS_TYPE_SYSTEM_INFORMATION) {
         Type1Record = (SMBIOS_TABLE_TYPE1 *) Record;
         StrIndex = Type1Record->ProductName;
+        Str2Index = Type1Record->Manufacturer;
         GetOptionalStringByIndex ((CHAR8*)((UINT8*)Type1Record + Type1Record->Hdr.Length), StrIndex, &NewString);
+        NewString2 = AllocateZeroPool (0x60);
+        GetDeviceNameFromProduct(NewString, &NewString2);
+        StrCatS (NewString3, 0x60 / sizeof (CHAR16), NewString2);
+        StrCatS (NewString3, 0x60 / sizeof (CHAR16), L" (");
+        StrCatS (NewString3, 0x60 / sizeof (CHAR16), NewString);
+        StrCatS (NewString3, 0x60 / sizeof (CHAR16), L")");
         TokenToUpdate = STRING_TOKEN (STR_FRONT_PAGE_COMPUTER_MODEL);
-        HiiSetString (gFrontPagePrivate.HiiHandle, TokenToUpdate, NewString, NULL);
+        HiiSetString (gFrontPagePrivate.HiiHandle, TokenToUpdate, NewString3, NULL);
         FreePool (NewString);
       }
 
@@ -774,13 +843,13 @@ UpdateFrontPageStrings (
         FreePool (NewString);
       }
 
-      if (Record->Type == SMBIOS_TYPE_PROCESSOR_INFORMATION) {
-        Type4Record = (SMBIOS_TABLE_TYPE4 *) Record;
-        ConvertProcessorToString(Type4Record->CurrentSpeed, 6, &NewString);
-        TokenToUpdate = STRING_TOKEN (STR_FRONT_PAGE_CPU_SPEED);
-        HiiSetString (gFrontPagePrivate.HiiHandle, TokenToUpdate, NewString, NULL);
-        FreePool (NewString);
-      }
+//      if (Record->Type == SMBIOS_TYPE_PROCESSOR_INFORMATION) {
+//        Type4Record = (SMBIOS_TABLE_TYPE4 *) Record;
+//        ConvertProcessorToString(Type4Record->CurrentSpeed, 6, &NewString);
+//        TokenToUpdate = STRING_TOKEN (STR_FRONT_PAGE_CPU_SPEED);
+//        HiiSetString (gFrontPagePrivate.HiiHandle, TokenToUpdate, NewString, NULL);
+//        FreePool (NewString);
+//      }
 
       if ( Record->Type == SMBIOS_TYPE_MEMORY_ARRAY_MAPPED_ADDRESS ) {
         Type19Record = (SMBIOS_TABLE_TYPE19 *) Record;
@@ -791,16 +860,15 @@ UpdateFrontPageStrings (
           InstalledMemory += RShiftU64(Type19Record->ExtendedEndingAddress -
                                        Type19Record->ExtendedStartingAddress + 1, 20);
         }
+        // now update the total installed RAM size
+        ConvertMemorySizeToString ((UINT32)InstalledMemory, &NewString );
+        TokenToUpdate = STRING_TOKEN (STR_FRONT_PAGE_MEMORY_SIZE);
+        HiiSetString (gFrontPagePrivate.HiiHandle, TokenToUpdate, NewString, NULL);
+        FreePool (NewString);
       }
 
       Status = Smbios->GetNext (Smbios, &SmbiosHandle, NULL, &Record, NULL);
-    }
-
-    // now update the total installed RAM size
-    ConvertMemorySizeToString ((UINT32)InstalledMemory, &NewString );
-    TokenToUpdate = STRING_TOKEN (STR_FRONT_PAGE_MEMORY_SIZE);
-    HiiSetString (gFrontPagePrivate.HiiHandle, TokenToUpdate, NewString, NULL);
-    FreePool (NewString);
+    } 
   }
 
   return ;
