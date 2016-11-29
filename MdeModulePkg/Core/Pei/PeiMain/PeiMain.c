@@ -206,16 +206,16 @@ PeiCore (
         OldCoreData->FileGuid             = (EFI_GUID *) ((UINT8 *) OldCoreData->FileGuid - OldCoreData->HeapOffset);
         OldCoreData->FileHandles          = (EFI_PEI_FILE_HANDLE *) ((UINT8 *) OldCoreData->FileHandles - OldCoreData->HeapOffset);
       }
-
-      //
-      // Initialize libraries that the PEI Core is linked against
-      //
-      ProcessLibraryConstructorList (NULL, (CONST EFI_PEI_SERVICES **)&OldCoreData->Ps);
       
       //
       // Fixup for PeiService's address
       //
       SetPeiServicesTablePointer ((CONST EFI_PEI_SERVICES **)&OldCoreData->Ps);
+
+      //
+      // Initialize libraries that the PEI Core is linked against
+      //
+      ProcessLibraryConstructorList (NULL, (CONST EFI_PEI_SERVICES **)&OldCoreData->Ps);
 
       //
       // Update HandOffHob for new installed permenent memory
@@ -302,14 +302,14 @@ PeiCore (
   PrivateData.Ps = &PrivateData.ServiceTableShadow;
 
   //
-  // Initialize libraries that the PEI Core is linked against
-  //
-  ProcessLibraryConstructorList (NULL, (CONST EFI_PEI_SERVICES **)&PrivateData.Ps);
-
-  //
   // Save PeiServicePointer so that it can be retrieved anywhere.
   //
   SetPeiServicesTablePointer ((CONST EFI_PEI_SERVICES **)&PrivateData.Ps);
+
+  //
+  // Initialize libraries that the PEI Core is linked against
+  //
+  ProcessLibraryConstructorList (NULL, (CONST EFI_PEI_SERVICES **)&PrivateData.Ps);
 
   //
   // Initialize PEI Core Services
