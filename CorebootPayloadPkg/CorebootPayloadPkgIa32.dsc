@@ -491,6 +491,9 @@
   #
   # ISA Support
   #
+  PcAtChipsetPkg/IsaAcpiDxe/IsaAcpi.inf
+  IntelFrameworkModulePkg/Bus/Isa/IsaBusDxe/IsaBusDxe.inf
+  IntelFrameworkModulePkg/Bus/Isa/Ps2KeyboardDxe/Ps2keyboardDxe.inf
 
   #
   # Console Support
