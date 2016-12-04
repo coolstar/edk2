@@ -222,12 +222,12 @@ INF CorebootPayloadPkg/PlatformGopPolicy/PlatformGopPolicy.inf
 
 FILE DRIVER = FF0C8745-3270-4439-B74F-3E45F8C77064 {
   SECTION DXE_DEPEX_EXP = {gPlatformGOPPolicyGuid}
-  SECTION PE32 = CorebootPayloadPkg/IntelBrdwlGopDriver.efi
+  SECTION PE32 = CorebootPayloadPkg/IntelGopDriver.efi
   SECTION UI = "IntelGopDriver"
 }
 
 FILE FREEFORM = 878AC2CC-5343-46F2-B563-51F89DAF56BA {
-  SECTION RAW = CorebootPayloadPkg/Vbt-C740.bin
+  SECTION RAW = CorebootPayloadPkg/vbt.bin
   SECTION UI = "IntelGopVbt"
 }
 
