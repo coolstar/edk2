@@ -1,0 +1,22 @@
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = iso9660
+  FILE_GUID                      = e5d91cbb-0b8c-4c6c-a4e8-9bf1c26ef8b6
+  MODULE_TYPE                    = UEFI_DRIVER
+  VERSION_STRING                 = 1.0
+
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+#
+
+VALID_ARCHITECTURES           = X64
+
+[Binaries.X64]
+  PE32|X64/iso9660.efi|*
+
