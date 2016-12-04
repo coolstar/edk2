@@ -125,6 +125,9 @@ INF CorebootModulePkg/PciBusNoEnumerationDxe/PciBusNoEnumeration.inf
 #
 # ISA Support
 #
+INF  PcAtChipsetPkg/IsaAcpiDxe/IsaAcpi.inf
+INF  IntelFrameworkModulePkg/Bus/Isa/IsaBusDxe/IsaBusDxe.inf
+INF  IntelFrameworkModulePkg/Bus/Isa/Ps2KeyboardDxe/Ps2keyboardDxe.inf
 
 #
 # Console Support
