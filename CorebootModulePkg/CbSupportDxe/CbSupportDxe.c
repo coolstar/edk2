@@ -104,12 +104,6 @@ OnReadyToBoot (
   IN  VOID       *Context
   )
 {
-  //
-  // Enable SCI
-  //
-  IoOr16 (mPmCtrlReg, BIT0);
-
-  DEBUG ((EFI_D_ERROR, "Enable SCI bit at 0x%lx before boot\n", (UINT64)mPmCtrlReg));
 }
 
 /**
