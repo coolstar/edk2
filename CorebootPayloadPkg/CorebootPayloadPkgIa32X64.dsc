@@ -507,7 +507,8 @@
   #
   # Framebuffer Gop
   #
-  CorebootPayloadPkg/FbGop/FbGop.inf
+  #CorebootPayloadPkg/FbGop/FbGop.inf
+  CorebootPayloadPkg/PlatformGopPolicy/PlatformGopPolicy.inf
 
   #------------------------------
   #  Build the shell
