@@ -184,7 +184,7 @@
   #
   TimerLib|CorebootPayloadPkg/Library/AcpiTimerLib/AcpiTimerLib.inf
   ResetSystemLib|CorebootPayloadPkg/Library/ResetSystemLib/ResetSystemLib.inf
-  SerialPortLib|CorebootModulePkg/Library/BaseSerialPortLib16550/BaseSerialPortLib16550.inf
+  SerialPortLib|MdeModulePkg/Library/BaseSerialPortLibNull/BaseSerialPortLib16550.inf
   PlatformHookLib|CorebootPayloadPkg/Library/PlatformHookLib/PlatformHookLib.inf
   PlatformBdsLib|CorebootModulePkg/Library/CorebootBdsLib/PlatformBds.inf
   IoApicLib|PcAtChipsetPkg/Library/BaseIoApicLib/BaseIoApicLib.inf
@@ -263,7 +263,7 @@
 #
 ################################################################################
 [PcdsFeatureFlag]
-  gEfiMdeModulePkgTokenSpaceGuid.PcdStatusCodeUseSerial|TRUE
+  gEfiMdeModulePkgTokenSpaceGuid.PcdStatusCodeUseSerial|FALSE
   gEfiMdeModulePkgTokenSpaceGuid.PcdStatusCodeUseMemory|FALSE
   gEfiMdeModulePkgTokenSpaceGuid.PcdDxeIplSwitchToLongMode|TRUE
   gEfiMdeModulePkgTokenSpaceGuid.PcdConOutGopSupport|TRUE
@@ -494,7 +494,6 @@
   #
   # ISA Support
   #
-  MdeModulePkg/Universal/SerialDxe/SerialDxe.inf
 
   #
   # Console Support
