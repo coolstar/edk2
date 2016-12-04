@@ -184,7 +184,7 @@
   ResetSystemLib|CorebootPayloadPkg/Library/ResetSystemLib/ResetSystemLib.inf
   SerialPortLib|CorebootModulePkg/Library/BaseSerialPortLib16550/BaseSerialPortLib16550.inf
   PlatformHookLib|CorebootPayloadPkg/Library/PlatformHookLib/PlatformHookLib.inf
-  PlatformBdsLib|DuetPkg/Library/DuetBdsLib/PlatformBds.inf
+  PlatformBdsLib|CorebootModulePkg/Library/CorebootBdsLib/PlatformBds.inf
   IoApicLib|PcAtChipsetPkg/Library/BaseIoApicLib/BaseIoApicLib.inf
   CbPlatformSupportLib|CorebootModulePkg/Library/CbPlatformSupportLibNull/CbPlatformSupportLibNull.inf
 
