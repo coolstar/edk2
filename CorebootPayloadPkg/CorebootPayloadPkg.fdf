@@ -120,7 +120,7 @@ INF MdeModulePkg/Universal/SmbiosDxe/SmbiosDxe.inf
 # PCI Support
 #
 INF CorebootModulePkg/Library/PciRootBridgeNoEnumerationDxe/PciRootBridgeNoEnumeration.inf
-INF CorebootModulePkg/PciBusNoEnumerationDxe/PciBusNoEnumeration.inf
+INF CorebootModulePkg/Library/PciBusNoEnumerationDxe/PciBusNoEnumeration.inf
 
 #
 # ISA Support

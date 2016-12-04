@@ -454,7 +454,7 @@
   # PCI Support
   #
   CorebootModulePkg/Library/PciRootBridgeNoEnumerationDxe/PciRootBridgeNoEnumeration.inf
-  CorebootModulePkg/PciBusNoEnumerationDxe/PciBusNoEnumeration.inf
+  CorebootModulePkg/Library/PciBusNoEnumerationDxe/PciBusNoEnumeration.inf
 
   #
   # SCSI/ATA/IDE/DISK Support
