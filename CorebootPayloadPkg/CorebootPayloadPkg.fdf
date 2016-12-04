@@ -125,7 +125,6 @@ INF CorebootModulePkg/PciBusNoEnumerationDxe/PciBusNoEnumeration.inf
 #
 # ISA Support
 #
-INF MdeModulePkg/Universal/SerialDxe/SerialDxe.inf
 
 #
 # Console Support
