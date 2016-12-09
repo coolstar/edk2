@@ -1159,6 +1159,8 @@ PlatformBdsEnterFrontPage (
     }
 
     if (SimpleTextOut != NULL) {
+      SimpleTextOut->SetMode (SimpleTextOut, 2);
+
       Status = SimpleTextOut->QueryMode (
                                 SimpleTextOut,
                                 SimpleTextOut->Mode->Mode,
@@ -1167,6 +1169,9 @@ PlatformBdsEnterFrontPage (
                                 );
       mBootTextModeColumn = (UINT32)BootTextColumn;
       mBootTextModeRow    = (UINT32)BootTextRow;
+
+      mSetupTextModeColumn = mBootTextModeColumn;
+      mSetupTextModeRow = mBootTextModeRow;
     }
 
     //
@@ -1174,8 +1179,8 @@ PlatformBdsEnterFrontPage (
     //  
     //mSetupHorizontalResolution = PcdGet32 (PcdSetupVideoHorizontalResolution);
     //mSetupVerticalResolution   = PcdGet32 (PcdSetupVideoVerticalResolution);      
-    mSetupTextModeColumn       = PcdGet32 (PcdSetupConOutColumn);
-    mSetupTextModeRow          = PcdGet32 (PcdSetupConOutRow);
+    //mSetupTextModeColumn       = PcdGet32 (PcdSetupConOutColumn);
+    //mSetupTextModeRow          = PcdGet32 (PcdSetupConOutRow);
 
     mModeInitialized           = TRUE;
   }
