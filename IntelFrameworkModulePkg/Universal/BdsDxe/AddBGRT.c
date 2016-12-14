@@ -257,7 +257,7 @@ void AddBGRT(){
   // Clear the BGRT.
   CopyMem(bgrt, data, sizeof(data));
 
-  bgrt->image_address = (UINTN)&BmpAddress;
+  bgrt->image_address = (UINTN)BmpAddress;
   bgrt->image_offset_x = (GraphicsOutput->Mode->Info->HorizontalResolution - 200)/2;
   bgrt->image_offset_y = (GraphicsOutput->Mode->Info->VerticalResolution * 2/3 - 161)/2;
   DEBUG ((EFI_D_INFO, "HackBGRT Set checksum\n"));
