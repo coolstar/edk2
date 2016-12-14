@@ -1,2 +1,4 @@
 Build/
 tags/
+*.bin
+*.efi
