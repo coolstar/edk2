@@ -785,6 +785,8 @@ GetDeviceNameFromProduct (
     StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"Acer Chromebook C720");
   } else if (!StrCmp(Product, L"Rikku")) {
     StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"Acer Chromebox CXI2");
+  } else if (!StrCmp(Product, L"Stumpy")) {
+    StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"Samsung Chromebox Series 3");
   } else if (!StrCmp(Product, L"Samus")) {
     StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"Google Pixel 2015");
   } else if (!StrCmp(Product, L"Tidus")) {
