@@ -761,6 +761,8 @@ GetDeviceNameFromProduct (
     StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"Acer Chromebook 11 C740");
   }  else if (!StrCmp(Product, L"Auron_Yuna")) {
     StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"Acer Chromebook 15 C910");
+  } else if (!StrCmp(Product, L"Chell")) {
+    StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"HP Chromebook 13 G1");
   } else if (!StrCmp(Product, L"Falco")) {
     StrCatS (*DeviceName, 0x40 / sizeof (CHAR16), L"HP Chromebook 14");
   } else if (!StrCmp(Product, L"Gandof")) {
